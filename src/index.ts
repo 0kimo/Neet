@@ -8,7 +8,12 @@ import event from "./handlers/event";
 import command from "./handlers/command";
 
 const client = new NeetClient({
-	intents: [GatewayIntentBits.Guilds]
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent
+	]
 });
 
 async function main() {

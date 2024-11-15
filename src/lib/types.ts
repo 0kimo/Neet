@@ -42,3 +42,8 @@ export interface ICommand {
 	data: SlashCommandBuilder;
 	options?: ICommandOptions;
 }
+
+export interface IComponentArg {
+	customId: string;
+	[key: string]: string | number | boolean;
+}

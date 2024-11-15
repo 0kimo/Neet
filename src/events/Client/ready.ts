@@ -9,6 +9,6 @@ export default {
 	run: async (client: NeetClient) => {
 		Bot.success(`${client.user?.username}, is ready!`);
 
-		//await client.registerCommands();
+		await client.registerCommands();
 	}
 };

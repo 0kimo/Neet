@@ -16,6 +16,7 @@ export class NeetClient extends Client {
 	}
 
 	public commands = new Collection<string, ICommand>();
+	public static store = new Collection<string, unknown>();
 
 	private async PUTCommands(commands: RESTPostAPIChatInputApplicationCommandsJSONBody[]) {
 		this.rest.setToken(process.env.TOKEN);

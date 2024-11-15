@@ -1,28 +1,31 @@
 /** @format */
 
 import { ColorResolvable, EmbedBuilder } from "discord.js";
-import { z } from "zod";
 
-const EmbedOptions = z.object({
-	prefix: z.string().default("You").optional(),
-	color: z.string().default("Orange").optional(),
-	timestamp: z.boolean().default(true).optional()
-});
+export function undefinedDatabase(
+	content?: string,
+	options?: { color?: ColorResolvable; prefix?: string; timestamp?: boolean }
+) {
+	const embed = new EmbedBuilder()
+		.setTitle(`:warning: | Missing Data`)
+		.setDescription((content ??= `Detacted no data for this server, please use this command again.`))
+		.setColor(options?.color ?? "Orange");
 
-type TEmbedOptions = z.infer<typeof EmbedOptions>;
+	if (options?.timestamp != false) embed.setTimestamp();
+	return embed;
+}
 
-export function permissionsWarning(missing: string | string[], _options?: TEmbedOptions) {
-	const options = EmbedOptions.parse(_options);
-	const color = options.color as ColorResolvable;
-	console.log(options, color);
-
+export function permissionsWarning(
+	missing: string | string[],
+	options?: { color?: ColorResolvable; prefix?: string; timestamp?: boolean }
+) {
 	const embed = new EmbedBuilder()
 		.setTitle(":x: | Missing Permissions")
 		.setDescription(
-			`${options.prefix} need these permissions to run this interaction.\n\n**»»»** Permissions: ${Array.isArray(missing) ? `[**${missing.length}**]` : ""}\n${Array.isArray(missing) ? missing.join(", ") : missing}`
+			`${options?.prefix} need these permissions to run this interaction.\n\n**»»»** Permissions: ${Array.isArray(missing) ? `[**${missing.length}**]` : ""}\n${Array.isArray(missing) ? missing.join(", ") : missing}`
 		)
-		.setColor(color ?? "Orange");
+		.setColor(options?.color ?? "Orange");
 
-	if (options.timestamp != false) embed.setTimestamp();
+	if (options?.timestamp != false) embed.setTimestamp();
 	return embed;
 }

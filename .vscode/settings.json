@@ -1,3 +1,5 @@
 {
-  "deno.enable": true
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 20,
+  "editor.stickyScroll.enabled": false
 }
